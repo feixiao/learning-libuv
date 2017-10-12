@@ -7,7 +7,7 @@
 
 
 #define FIB_UNTIL 8
-uv_loop_t *loop;
+
 
 long fib_(long t)
 {
@@ -40,6 +40,8 @@ void after_fib(uv_work_t *req, int status)
 
 int main()
 {
+    uv_loop_t *loop;
+    
     loop = uv_default_loop();
 
     int data[FIB_UNTIL];

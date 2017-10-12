@@ -4,6 +4,11 @@
 #include <unistd.h>
 #include <uv.h>
 
+
+// gcc -Wall main.c -o uvcat -luv
+// ./uvcat ./1.txt
+
+
 void on_read(uv_fs_t *req);
 
 uv_fs_t open_req;
@@ -31,9 +36,11 @@ void on_read(uv_fs_t *req) {
         uv_fs_t close_req;
         // synchronous
         uv_fs_close(uv_default_loop(), &close_req, open_req.result, NULL);
+        printf("******Read file done!!!");
     }
     else if (req->result > 0) {
-        iov.len = req->result;
+        iov.len = req->result;  // 读取数据的长度(数据读写完毕才触发回调)
+        // 因为cat功能，所以将读取的数据写入控制台
         uv_fs_write(uv_default_loop(), &write_req, 1, &iov, 1, -1, on_write);
     }
 }

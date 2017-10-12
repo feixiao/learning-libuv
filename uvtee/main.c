@@ -2,9 +2,12 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-#include <stdlib.h>
 
 #include <uv.h>
+
+
+// gcc -Wall main.c -o uvtee -luv
+// ./uvtee <output_file>
 
 typedef struct {
     uv_write_t req;

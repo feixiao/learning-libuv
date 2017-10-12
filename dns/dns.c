@@ -13,6 +13,7 @@ void on_resolved(uv_getaddrinfo_t *resolver, int status, struct addrinfo *res) {
         fprintf(stderr, "getaddrinfo callback error %s\n", uv_err_name(status));
         return;
     }
+    sleep(10);
     char addr[17] = {'\0'};
     uv_ip4_name((struct sockaddr_in*) res->ai_addr, addr, 16);
     fprintf(stderr, "%s\n", addr);

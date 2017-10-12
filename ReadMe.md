@@ -45,6 +45,9 @@
 + [timer](./timer/timer.c) 定时器实现，实现了简单的计时器功能，100毫秒之后开始触发每隔1000毫秒重复一次。
 + [threadpool](./threadpool/threadpool.c) 使用内部的线程池，即工作队列。
 + [dns](./dns/dns.c) 异步解析DNS。
++ [uvcat](./uvcat/main.c) 基于libuv实现的cat工具。
++ [uvtee](./uvtee/main.c) 基于libuv实现的tee工具(把标准输入中的内容输出到文件)。
++ ​
 
 ### 参考资料
 
@@ -52,4 +55,5 @@
 + [《User Guide》](http://docs.libuv.org/en/v1.x/guide.html)
 + [libuv源码剖析：高效线程池(threadpool)的实现](http://www.cnblogs.com/chenyangyao/p/libuv_threadpool.html)
 + [libuv的线程池，即工作队列](http://blog.csdn.net/lc250123/article/details/52619314)
++ [Chinese-uvbook](https://github.com/feixiao/Chinese-uvbook)
 

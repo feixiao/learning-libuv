@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <uv.h>
 
+
+// gcc -Wall main.c -o hello -luv
+
 int main() {
     uv_loop_t *loop = malloc(sizeof(uv_loop_t));
     uv_loop_init(loop);

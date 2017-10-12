@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <uv.h>
 
+// gcc -Wall main.c -o idle -luv
+
 int64_t counter = 0;
 
 void wait_for_a_while(uv_idle_t* handle) {

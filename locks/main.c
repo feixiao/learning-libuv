@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <uv.h>
 
+
+// gcc -Wall main.c -o locks -luv -lpthread
+
+
 uv_barrier_t blocker;
 uv_rwlock_t numlock;
 int shared_num;
@@ -16,7 +20,7 @@ void reader(void *n)
         uv_rwlock_rdunlock(&numlock);
         printf("Reader %d: released lock\n", num);
     }
-    uv_barrier_wait(&blocker);
+    uv_barrier_wait(&blocker); // 3 & 4
 }
 
 void writer(void *n)
@@ -31,16 +35,18 @@ void writer(void *n)
         uv_rwlock_wrunlock(&numlock);
         printf("Writer %d: released lock\n", num);
     }
-    uv_barrier_wait(&blocker);
+    uv_barrier_wait(&blocker); // 2
 }
 
 int main()
 {
-    uv_barrier_init(&blocker, 4);
+    uv_barrier_init(&blocker, 4); // 需要等待4个线程全部等待才返回
 
     shared_num = 0;
     uv_rwlock_init(&numlock);
 
+
+    // 创建三个线程，2个线程读一个线程写
     uv_thread_t threads[3];
 
     int thread_nums[] = {1, 2, 1};
@@ -49,7 +55,7 @@ int main()
 
     uv_thread_create(&threads[2], writer, &thread_nums[2]);
 
-    uv_barrier_wait(&blocker);
+    uv_barrier_wait(&blocker); // 1
     uv_barrier_destroy(&blocker);
 
     uv_rwlock_destroy(&numlock);

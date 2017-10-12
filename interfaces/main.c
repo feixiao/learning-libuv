@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <uv.h>
 
+
+// gcc -Wall main.c -o interface -luv
+
 int main() {
     char buf[512];
     uv_interface_address_t *info;

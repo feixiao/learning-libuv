@@ -4,6 +4,9 @@
 
 #include <uv.h>
 
+
+// gcc -Wall main.c -o queue-cancel -luv
+
 #define FIB_UNTIL 25
 uv_loop_t *loop;
 uv_work_t fib_reqs[FIB_UNTIL];

@@ -6,11 +6,13 @@
 #define DEFAULT_PORT 7000
 #define DEFAULT_BACKLOG 128
 
+// gcc -Wall main.c -o echo_server -luv
+
 uv_loop_t *loop;
 struct sockaddr_in addr;
 
 typedef struct {
-    uv_write_t req;
+    uv_write_t req; // 与uv_write_t进行转换
     uv_buf_t buf;
 } write_req_t;
 
@@ -29,6 +31,7 @@ void on_close(uv_handle_t* handle) {
     free(handle);
 }
 
+// 写操作执行完之后调用
 void echo_write(uv_write_t *req, int status) {
     if (status) {
         fprintf(stderr, "Write error %s\n", uv_strerror(status));
@@ -37,12 +40,14 @@ void echo_write(uv_write_t *req, int status) {
 }
 
 void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
+    // 读取客户端发生过来的数据之后调用
     if (nread > 0) {
         write_req_t *req = (write_req_t*) malloc(sizeof(write_req_t));
         req->buf = uv_buf_init(buf->base, nread);
         uv_write((uv_write_t*) req, client, &req->buf, 1, echo_write);
         return;
     }
+    // 数据读取错误
     if (nread < 0) {
         if (nread != UV_EOF)
             fprintf(stderr, "Read error %s\n", uv_err_name(nread));
@@ -78,6 +83,7 @@ int main() {
     uv_ip4_addr("0.0.0.0", DEFAULT_PORT, &addr);
 
     uv_tcp_bind(&server, (const struct sockaddr*)&addr, 0);
+    // 有新连接进入的时候调用on_new_connection
     int r = uv_listen((uv_stream_t*) &server, DEFAULT_BACKLOG, on_new_connection);
     if (r) {
         fprintf(stderr, "Listen error %s\n", uv_strerror(r));

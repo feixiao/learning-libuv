@@ -2,6 +2,8 @@
 
 #include <uv.h>
 
+//  gcc -Wall main.c -o detach  -luv
+
 uv_loop_t *loop;
 uv_process_t child_req;
 uv_process_options_t options;
@@ -17,7 +19,7 @@ int main() {
     options.exit_cb = NULL;
     options.file = "sleep";
     options.args = args;
-    options.flags = UV_PROCESS_DETACHED;
+    options.flags = UV_PROCESS_DETACHED; // 创建守护进程
 
     int r;
     if ((r = uv_spawn(loop, &child_req, &options))) {

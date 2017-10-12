@@ -4,11 +4,16 @@
 
 #include <uv.h>
 
+
+// gcc -Wall main.c -o progress -luv
+
 uv_loop_t *loop;
 uv_async_t async;
 
 double percentage;
 
+
+// 修改了进度显示器，使用uv_async_send发送进度信息。
 void fake_download(uv_work_t *req) {
     int size = *((int*) req->data);
     int downloaded = 0;
@@ -28,6 +33,7 @@ void after(uv_work_t *req, int status) {
     uv_close((uv_handle_t*) &async, NULL);
 }
 
+// 标准的libuv模式，从监视器中抽取数据。
 void print_progress(uv_async_t *handle) {
     double percentage = *((double*) handle->data);
     fprintf(stderr, "Downloaded %.2f%%\n", percentage);

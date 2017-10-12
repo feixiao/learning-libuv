@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <uv.h>
 
+// gcc -Wall main.c -o signal -luv
 uv_loop_t* create_loop()
 {
     uv_loop_t *loop = malloc(sizeof(uv_loop_t));

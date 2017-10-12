@@ -5,6 +5,9 @@
 
 #include <uv.h>
 
+
+// gcc -Wall main.c -o udp-dhcp -luv 
+
 uv_loop_t *loop;
 uv_udp_t send_socket;
 uv_udp_t recv_socket;

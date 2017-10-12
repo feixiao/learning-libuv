@@ -3,6 +3,9 @@
 
 #include <uv.h>
 
+
+// gcc -Wall main.c -o spawn -luv
+
 uv_loop_t *loop;
 uv_process_t child_req;
 uv_process_options_t options;
@@ -25,6 +28,7 @@ int main() {
     options.args = args;
 
     int r;
+    //  创建子进程创建文件夹
     if ((r = uv_spawn(loop, &child_req, &options))) {
         fprintf(stderr, "%s\n", uv_strerror(r));
         return 1;

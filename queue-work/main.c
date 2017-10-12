@@ -7,6 +7,8 @@
 #define FIB_UNTIL 25
 uv_loop_t *loop;
 
+// gcc -Wall main.c -o queue-work -luv
+
 long fib_(long t) {
     if (t == 0 || t == 1)
         return 1;

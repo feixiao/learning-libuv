@@ -40,14 +40,28 @@
 
 ### 快速入门
 
-**注**： 实例代码可以参考test目录下面的测试用例。
++ [hello](./hello/main.c) 启动一个loop，其他什么事情都没有做。
++ [idle-basic](./idle-basic/main.c) 一个使用空转handle的例子。
+
 
 + [timer](./timer/timer.c) 定时器实现，实现了简单的计时器功能，100毫秒之后开始触发每隔1000毫秒重复一次。
 + [threadpool](./threadpool/threadpool.c) 使用内部的线程池，即工作队列。
-+ [dns](./dns/dns.c) 异步解析DNS。
 + [uvcat](./uvcat/main.c) 基于libuv实现的cat工具。
 + [uvtee](./uvtee/main.c) 基于libuv实现的tee工具(把标准输入中的内容输出到文件)。
 + [onChange](./onchange/main.c) 监控文件变化。
++ [tcp-echo-server](./tcp-echo-server/main.c)  基于libuv的echo server实现。
++ [udp-dhcp](./udp-dhcp/main.c) 一个从DCHP服务器获取ip的例子。
++ [dns](./dns/dns.c) 异步解析DNS。
++ [interfaces](./interfaces/main.c) 打印出所有可以获取的网卡信息。
++ [thread-create](./thread-create/main.c) 线程的创建和停止。
++ [locks](./locks/main.c) 简单读写锁使用。
++ [queue-work](./queue-work/main.c) 工作队列使用的例子。
++ [queue-cancel](./queue-cancel/main.c) 取消未开始的工作队列。
++ [progress](./progress/main.c) 演示了一个下载管理程序向用户展示各个下载线程的进度。  
++ [spawn](./spawn/main.c) 创建子进程。
++ [detach](./detach/main.c) 创建守护进程。
++ [signal](./signal/main.c) 向进程发生信号。
++  
 
 ### 参考资料
 

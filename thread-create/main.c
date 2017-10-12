@@ -3,6 +3,8 @@
 
 #include <uv.h>
 
+
+// gcc -Wall main.c -o thread -luv -lpthread
 void hare(void *arg) {
     int tracklen = *((int *) arg);
     while (tracklen) {

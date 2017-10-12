@@ -3,6 +3,10 @@
 
 #include <uv.h>
 
+
+// gcc -Wall main.c -o onChange -luv
+// ./onChange <command> <file1> [file2] ...
+
 uv_loop_t *loop;
 const char *command;
 

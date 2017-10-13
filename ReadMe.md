@@ -62,6 +62,10 @@
 + [detach](./detach/main.c) 创建守护进程。
 + [signal](./signal/main.c) 向进程发生信号。
 + [proc-streams](./proc-streams/main.c) 子进程继承父进程文件描述符。
++ [uvstop](./uvstop/main.c)  演示如何停止loop。
++ [ref-timer](./ref-timer/time.c) timer的使用例子。
++ [idle-compute](./idle-compute/main.c) 使用uv_idle_t的例子。
++ [uvwget](./uvwget/main.c) 基于libuv实现的wget程序。
 
 ### 参考资料
 

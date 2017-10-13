@@ -1,6 +1,7 @@
 #include <stdio.h>
-
 #include <uv.h>
+
+// gcc -Wall main.c -o idle-compute  -luv
 
 uv_loop_t *loop;
 uv_fs_t stdin_watcher;
@@ -19,12 +20,13 @@ void crunch_away(uv_idle_t* handle) {
 
 void on_type(uv_fs_t *req) {
     if (stdin_watcher.result > 0) {
+        // 读取内容之后输出
         buffer[stdin_watcher.result] = '\0';
         printf("Typed %s\n", buffer);
 
         uv_buf_t buf = uv_buf_init(buffer, 1024);
         uv_fs_read(loop, &stdin_watcher, 0, &buf, 1, -1, on_type);
-        uv_idle_start(&idler, crunch_away);
+        uv_idle_start(&idler, crunch_away); // 再次调用
     }
     else if (stdin_watcher.result < 0) {
         fprintf(stderr, "error opening file: %s\n", uv_strerror(req->result));
@@ -37,6 +39,7 @@ int main() {
     uv_idle_init(loop, &idler);
 
     uv_buf_t buf = uv_buf_init(buffer, 1024);
+    // 读取数据完成之后调用on_type
     uv_fs_read(loop, &stdin_watcher, 0, &buf, 1, -1, on_type);
     uv_idle_start(&idler, crunch_away);
     return uv_run(loop, UV_RUN_DEFAULT);

@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <uv.h>
 
+
+
+// gcc -Wall main.c -o uvstop -luv
+
 int64_t counter = 0;
 
 void idle_cb(uv_idle_t *handle) {

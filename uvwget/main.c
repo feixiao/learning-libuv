@@ -4,6 +4,11 @@
 #include <uv.h>
 #include <curl/curl.h>
 
+
+// gcc -Wall main.c -o uvwget  -luv -lcurl 
+// ./uvwget [url1] [url2] ...
+
+
 uv_loop_t *loop;
 CURLM *curl_handle;
 uv_timer_t timeout;
@@ -36,7 +41,7 @@ void destroy_curl_context(curl_context_t *context) {
     uv_close((uv_handle_t*) &context->poll_handle, curl_close_cb);
 }
 
-
+// Adding urls
 void add_download(const char *url, int num) {
     char filename[50];
     sprintf(filename, "%d.download", num);
@@ -94,6 +99,7 @@ void curl_perform(uv_poll_t *req, int status, int events) {
     check_multi_info();   
 }
 
+// libcurl用来告知我们下一次的超时间隔的，之后我们就应该不管当前IO状态，驱动libcurl向前。
 void on_timeout(uv_timer_t *req) {
     int running_handles;
     curl_multi_socket_action(curl_handle, CURL_SOCKET_TIMEOUT, 0, &running_handles);
@@ -106,6 +112,8 @@ void start_timeout(CURLM *multi, long timeout_ms, void *userp) {
     uv_timer_start(&timeout, on_timeout, timeout_ms, 0);
 }
 
+
+// 在socket状态改变的时候被触发，因此我们不得不开始轮询它。
 int handle_socket(CURL *easy, curl_socket_t s, int action, void *userp, void *socketp) {
     curl_context_t *curl_context;
     if (action == CURL_POLL_IN || action == CURL_POLL_OUT) {

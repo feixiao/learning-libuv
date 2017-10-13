@@ -4,6 +4,10 @@
 #include <string.h>
 #include <uv.h>
 
+
+
+// gcc -Wall main.c  -o cgi -luv
+
 uv_loop_t *loop;
 uv_process_t child_req;
 uv_process_options_t options;

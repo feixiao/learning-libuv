@@ -61,7 +61,7 @@
 + [spawn](./spawn/main.c) 创建子进程。
 + [detach](./detach/main.c) 创建守护进程。
 + [signal](./signal/main.c) 向进程发生信号。
-+  
++ [proc-streams](./proc-streams/main.c) 子进程继承父进程文件描述符。
 
 ### 参考资料
 
